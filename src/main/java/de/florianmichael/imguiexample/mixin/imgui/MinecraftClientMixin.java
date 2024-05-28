@@ -14,7 +14,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
 
-    @Shadow @Final private Window window;
+    @Shadow
+    @Final
+    private Window window;
 
     @Inject(method = "<init>", at = @At("RETURN"))
     public void initImGui(RunArgs args, CallbackInfo ci) {

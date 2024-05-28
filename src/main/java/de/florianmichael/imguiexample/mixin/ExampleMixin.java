@@ -12,21 +12,23 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(TitleScreen.class)
 public class ExampleMixin {
-	@Inject(at = @At("HEAD"), method = "init()V")
-	private void init(CallbackInfo info) {
-		ExampleMod.LOGGER.info("This line is printed by an example mod mixin!");
-	}
+    @Inject(at = @At("HEAD"), method = "init()V")
+    private void init(CallbackInfo info) {
+        ExampleMod.LOGGER.info("This line is printed by an example mod mixin!");
+    }
 
-	@Inject(method = "render", at = @At("RETURN"))
-	private void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-		ImGuiImpl.draw(io -> {
-			// Example on how to use a custom Font
-			// ImGui.pushFont(ImGuiImpl.defaultFont);
+    @Inject(method = "render", at = @At("RETURN"))
+    private void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        ImGuiImpl.draw(io -> {
+            // Example on how to use a custom Font
+            // ImGui.pushFont(ImGuiImpl.defaultFont);
             ImGui.begin("Hello World");
-			ImGui.end();
+			// Draw something here, see the official example module for more information:
+			// https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp
+            ImGui.end();
 
-			ImGui.showDemoWindow();
-			// ImGui.popFont();
-		});
-	}
+            ImGui.showDemoWindow();
+            // ImGui.popFont();
+        });
+    }
 }
