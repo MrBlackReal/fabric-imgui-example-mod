@@ -16,11 +16,6 @@ repositories {
 	mavenCentral()
 }
 
-configurations {
-	implementation.extendsFrom lib
-	api.extendsFrom lib
-}
-
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
@@ -38,12 +33,12 @@ dependencies {
 	// You can use the lib configuration to add something as it would be added if you would use implementation, but everything which is added by lib
 	// will be shaded into the jar file if you build the project via /gradle build
 
-	lib "io.github.spair:imgui-java-binding:${project.imgui_version}"
-	lib "io.github.spair:imgui-java-lwjgl3:${project.imgui_version}"
+	include implementation("io.github.spair:imgui-java-binding:${project.imgui_version}")
+	include implementation("io.github.spair:imgui-java-lwjgl3:${project.imgui_version}")
 
-	lib "io.github.spair:imgui-java-natives-windows:${project.imgui_version}"
-	lib "io.github.spair:imgui-java-natives-linux:${project.imgui_version}"
-	lib "io.github.spair:imgui-java-natives-macos:${project.imgui_version}"
+	include implementation("io.github.spair:imgui-java-natives-windows:${project.imgui_version}")
+	include implementation("io.github.spair:imgui-java-natives-linux:${project.imgui_version}")
+	include implementation("io.github.spair:imgui-java-natives-macos:${project.imgui_version}")
 }
 
 base {
@@ -73,13 +68,6 @@ java {
 }
 
 jar {
-	dependsOn configurations.lib
-	from {
-		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-		configurations.lib.collect {
-			zipTree(it)
-		}
-	}
 	from("LICENSE") {
 		rename { "${it}_${base.archivesName.get()}"}
 	}
