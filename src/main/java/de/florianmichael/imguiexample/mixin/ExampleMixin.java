@@ -19,15 +19,17 @@ public class ExampleMixin {
 
     @Inject(method = "render", at = @At("RETURN"))
     private void render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        // ImGui.showStyleEditor();
+
         ImGuiImpl.draw(io -> {
             // Example on how to use a custom Font
             // ImGui.pushFont(ImGuiImpl.defaultFont);
             ImGui.begin("Hello World");
-			// Draw something here, see the official example module for more information:
-			// https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp
+            // Draw something here, see the official example module for more information:
+            // https://github.com/ocornut/imgui/blob/master/imgui_demo.cpp
             ImGui.end();
 
-            ImGui.showDemoWindow();
+            ImGui.showStyleEditor();
             // ImGui.popFont();
         });
     }
